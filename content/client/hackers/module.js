@@ -1,46 +1,45 @@
 /* global angular */
-(function () {
-    'use strict';
+(function() {
+	"use strict";
 
-    angular.module('client.hackers', ['ui.router', 'client.services'])
+	angular.module("client.hackers", ["ui.router", "client.services"]);
 
-    angular.module('client.hackers').config(RouteConfig);
+	angular.module("client.hackers").config(RouteConfig);
 
-    RouteConfig.$inject = ['$stateProvider'];
+	RouteConfig.$inject = ["$stateProvider"];
 
-    function RouteConfig($stateProvider) {
-        $stateProvider
-            .state('site.hackers', {
-                url: '/hackers',
-                abstract: true
-            })
-            .state('site.hackers.list', {
-                url: '/list',
-                views: {
-                    'content@site': {
-                        templateUrl: 'client/hackers/list/hacker-list.html',
-                        controller: 'hackerListController as hackerCtrl'
-                    }
-                },
-                resolve: {
-                    hackers: getAllHackers
-                }
-            })
-            .state('site.hackers.detail', {
-                url: '/:id',
-                views: {
-                    'content@site': {
-                        templateUrl: 'client/hackers/detail/hacker-detail.html',
-                        controller: 'hackerDetailController as hackerCtrl'
-                    }
-                }
-            });
-    }
+	function RouteConfig($stateProvider) {
+		$stateProvider
+			.state("site.hackers", {
+				url: "/hackers",
+				abstract: true
+			})
+			.state("si`te.hackers.list", {
+				url: "/list",
+				views: {
+					"content@site": {
+						templateUrl: "client/hackers/list/hacker-list.html",
+						controller: "hackerListController as hackerCtrl"
+					}
+				},
+				resolve: {
+					hackers: getAllHackers
+				}
+			})
+			.state("site.hackers.detail", {
+				url: "/:id",
+				views: {
+					"content@site": {
+						templateUrl: "client/hackers/detail/hacker-detail.html",
+						controller: "hackerDetailController as hackerCtrl"
+					}
+				}
+			});
+	}
 
-    getAllHackers.$inject = ['hackerService']
+	getAllHackers.$inject = ["hackerService"];
 
-    function getAllHackers(hackerService) {
-        return hackerService.readAll()
-            .then(data => data.items)
-    }
+	function getAllHackers(hackerService) {
+		return hackerService.readAll().then(data => data.items);
+	}
 })();
